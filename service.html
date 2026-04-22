@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Services</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f2f2f2;
+}
+
+/* NAV */
+.navbar {
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* CARS */
+.cars {
+    padding: 20px;
+    text-align: center;
+}
+
+.car-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.car {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.car:hover {
+    transform: scale(1.03);
+}
+
+.car img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* BUTTONS */
+button {
+    margin: 5px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+<script>
+    function openCar(name, price, condition, availability) {
+    document.getElementById("popup").style.display = "flex";
+
+    document.getElementById("carName").innerText = name;
+    document.getElementById("carPrice").innerText = price;
+    document.getElementById("carCondition").innerText = "Condition: " + condition;
+    document.getElementById("carAvailability").innerText = "Availability: " + availability;
+}
+
+function closeCar() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h2>Car Rental</h2>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- CARS -->
+<section class="cars">
+
+    <h1>Our Cars</h1>
+
+    <div class="car-box">
+
+        <!-- LUXURY -->
+        <div class="car" onclick="openCar('Rolls Royce Phantom', '£1200/day', 'Excellent', 'Available')">
+            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6">
+            <h3>Rolls Royce Phantom</h3>
+            <p>£150 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Bentley Continental GT', '£1000/day', 'Excellent', 'Available')">
+            <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a">
+            <h3>Bentley Continental GT</h3>
+            <p>£90 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Lamborghini Urus', '£950/day', 'Excellent', 'Limited')">
+            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
+            <h3>Lamborghini Urus</h3>
+            <p>£120 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Ferrari Roma', '£900/day', 'Excellent', 'Available')">
+            <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6">
+            <h3>Ferrari Roma</h3>
+            <p>£130per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Porsche Panamera', '£800/day', 'Very Good', 'Available')">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+            <h3>Porsche Panamera</h3>
+            <p>£135 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <!-- MID RANGE -->
+        <div class="car" onclick="openCar('Mercedes S-Class', '£750/day', 'Very Good', 'Available')">
+            <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a">
+            <h3>Mercedes S-Class</h3>
+            <p>£90 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('BMW 7 Series', '£700/day', 'Good', 'Available')">
+            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6">
+            <h3>BMW 7 Series</h3>
+            <p>£80per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Audi A8', '£680/day', 'Good', 'Available')">
+            <img src="https://cdn.pixabay.com/photo/2017/03/27/14/56/audi-2179220_1280.jpg" width="100%" height="150px" style="object-fit:cover;">
+            <h3>Audi A8 </h3>
+            <p>£60 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+
+        <div class="car" onclick="openCar('Range Rover Sport', '£650/day', 'Very Good', 'Limited')">
+            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a">
+            <h3>Range Rover Sport</h3>
+            <p>£60 per day</p>
+            <button onclick="location.href='contact.html'">Rent</button>
+            <button>More</button>
+        </div>
+         …
