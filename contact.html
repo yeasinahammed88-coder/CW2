@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - CarRental</title>
+    <link rel="stylesheet" href="contact.css">
+<style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* NAV */
+nav {
+    background: #1e1e1e;
+    padding: 15px;
+    text-align: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* BACKGROUND */
+.contact-section {
+    background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BLUR EFFECT */
+.overlay {
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* FORM */
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 350px;
+    margin: auto;
+}
+
+#contactForm input,
+#contactForm textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#contactForm textarea {
+    height: 90px;
+}
+
+/* BUTTON */
+.btn {
+    background: #00bcd4;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0197a6;
+}
+
+/* BOOKINGS */
+#bookingList {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.booking-card {
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 5px solid #00bcd4;
+}
+
+/* POPUP */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<script>
+    const form = document.getElementById("contactForm");
+const bookingList = document.getElementById("bookingList");
+const popup = document.getElementById("popup");
+
+// LOAD BOOKINGS
+function loadBookings() {
+    bookingList.innerHTML = "";
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    bookings.forEach((data, index) => {
+        const div = document.createElement("div");
+        div.classList.add("booking-card");
+
+        div.innerHTML = `
+            <p><strong>${data.name}</strong></p>
+            <p>${data.email}</p>
+            <button onclick="editBooking(${index})" class="btn">Edit</button>
+            <button onclick="deleteBooking(${index})" class="btn" style="background:#e53935;">Delete</button>
+        `;
+
+        bookingList.appendChild(div);
+    });
+}
+
+loadBookings();
+
+// SUBMIT
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById("name").value.trim();
+    const emailInput = document.getElementById("email").value.trim();
+    const phoneInput = document.getElementById("phone").value.trim();
+    const postcodeInput = document.getElementById("postcode").value.trim();
+    const messageInput = document.getElementById("message").value.trim();
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!emailInput.match(emailPattern)) {
+        alert("Enter a valid email");
+        return;
+    }
+
+    if (!nameInput || !phoneInput || !postcodeInput || !messageInput) {
+        alert("Fill all fields");
+        return;
+    }
+
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    bookings.push({
+        name: nameInput,
+        email: emailInput,
+        phone: phoneInput,
+        postcode: postcodeInput,
+        message: messageInput
+    });
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    form.reset();
+    loadBookings();
+
+    // SHOW POPUP
+    popup.style.display = "flex";
+});
+
+// CLOSE POPUP
+function closePopup() {
+    popup.style.display = "none";
+}
+
+// EDIT
+function editBooking(index) {
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const data = bookings[index];
+
+    document.getElementById("name").value = data.name;
+    document.getElementById("email").value = data.email;
+    document.getElementById("phone").value = data.phone;
+    document.getElementById("postcode").value = data.postcode;
+    document.getElementById("message").value = data.message;
+
+    bookings.splice(index, 1);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    loadBookings();
+}
+
+// DELETE
+function deleteBooking(index) {
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    if (confirm("Delete this booking?")) {
+        bookings.splice(index, 1);
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+        loadBookings();
+    }
+}
+</script>
+
+<nav>
+    <div class="logo">CarRental</div>
+</nav>
+
+<section class="contact-section">
+    <div class="overlay">
+        <h2>Contact & Booking</h2>
+
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="text" id="postcode" placeholder="Post Code" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+
+        <p class="info-text">
+            Email: <strong>carrental@email.com</strong>
+        </p>
+
+        <h3>Saved Bookings</h3>
+        <div id="bookingList"></div>
+    </div>
+</section>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <p>✅ Booking Successful!</p>
+        <p>Our team will contact you and send a confirmation email.</p>
+        <button onclick="closePopup()" class="btn">OK</button>
+    </div>
+</div>
+
+<script src="contact.js"></script>
+
+</body>
+</html>
