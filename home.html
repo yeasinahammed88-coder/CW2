@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Rental Service</title>
+
+    
+    <style>
+        /* =======================
+   GLOBAL STYLES
+======================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+}
+
+/* =======================
+   NAVIGATION
+======================= */
+nav {
+    background: #1e1e1e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    color: #00bcd4;
+}
+
+/* =======================
+   HERO SECTION
+======================= */
+.hero {
+    background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+    height: 70vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px black;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* =======================
+   BUTTONS
+======================= */
+.btn {
+    padding: 12px 25px;
+    background: #00bcd4;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn:hover {
+    background: #0197a6;
+}
+
+/* =======================
+   CARS SECTION
+======================= */
+.cars-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.cars-section h2 {
+    margin-bottom: 25px;
+}
+
+.car-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.car-card {
+    background: white;
+    width: 280px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.car-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.car-card h3 {
+    margin-top: 10px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+footer {
+    background: #1e1e1e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">CarRental</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="service.html">Service</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Find Your Perfect Ride</h1>
+        <p>Affordable and comfortable cars for your next journey</p>
+        <button class="btn rent-btn">Book Now</button>
+    </section>
+
+    <!-- CARS -->
+    <section class="cars-section" id="cars">
+        <h2>Featured Cars</h2>
+
+        <div class="car-container">
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=800&q=80">
+                <h3>Volkswagen Golf</h3>
+                <p>From £50/day</p>
+                <button class="btn rent-btn">Rent Now</button>
+                <button class="btn details-btn">Details</button>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60">
+                <h3>Range Rover Sport</h3>
+                <p>From £75/day</p>
+                <button class="btn rent-btn">Rent Now</button>
+                <button class="btn details-btn">Details</button>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=800&q=60">
+                <h3>Mercedes Benz C-Class</h3>
+                <p>From £90/day</p>
+                <button class="btn rent-btn">Rent Now</button>
+                <button class="btn details-btn">Details</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 CarRental. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Rent Now → Contact
+        document.querySelectorAll(".rent-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                window.location.href = "contact.html";
+            });
+        });
+
+        // Details → Cars
+        document.querySelectorAll(".details-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                document.getElementById("cars").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
